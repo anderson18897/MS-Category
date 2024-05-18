@@ -19,18 +19,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryDto createCategory(CategoryDto categoryDto) {
+    public void createCategory(CategoryDto categoryDto) {
         CategoryEntity entity = CategoryMapper.toEntity(categoryDto);
-        return CategoryMapper.toDto(categoryRepository.save(entity));
+        categoryRepository.save(entity);
     }
 
     @Override
     @Transactional
-    public CategoryDto updateCategory(UUID id, CategoryDto categoryDto) {
-        return categoryRepository.findById(id)
+    public void updateCategory(UUID id, CategoryDto categoryDto) {
+        categoryRepository.findById(id)
                 .map(existingEntity -> {
                     existingEntity.setDescription(categoryDto.getDescription());
-                    return CategoryMapper.toDto(categoryRepository.save(existingEntity));
+                    return categoryRepository.save(existingEntity);
                 }).orElseThrow(() -> new RuntimeException("Category not found"));
     }
 

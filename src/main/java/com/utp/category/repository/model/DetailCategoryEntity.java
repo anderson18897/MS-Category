@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -16,15 +15,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "categoria")
-public class CategoryEntity extends BaseEntity implements Serializable {
+@Table(name = "detalle_categoria")
+public class DetailCategoryEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -3224272046158834811L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private UUID categoryId;
+    @Column(name = "id")
+    private Long detailCategoryId;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
 
     @Column(name = "description")
     private String description;

@@ -15,13 +15,13 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
-        return ResponseEntity.ok(categoryService.createCategory(categoryDto));
+    public void createCategory(@RequestBody CategoryDto categoryDto) {
+        categoryService.createCategory(categoryDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDto> updateCategory(@PathVariable UUID id, @RequestBody CategoryDto categoryDto) {
-        return ResponseEntity.ok(categoryService.updateCategory(id, categoryDto));
+    public void updateCategory(@PathVariable UUID id, @RequestBody CategoryDto categoryDto) {
+        categoryService.updateCategory(id, categoryDto);
     }
 
     @GetMapping
